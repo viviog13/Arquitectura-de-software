@@ -1,0 +1,23 @@
+# base image
+FROM python:3.6.3
+
+# install environment dependencies
+RUN apt-get update -yqq  && \
+    apt-get install -yqq --no-install-recommends \
+    netcat vim && \ 
+    apt-get -q clean
+
+# set working directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# add and install requirements
+COPY ./requirements.txt /usr/src/app/requirements.txt
+RUN pip install -r requirements.txt
+
+# add entrypoint-prod.sh
+COPY ./entrypoint.sh /usr/src/app/entrypoint-prod.sh
+RUN chmod +x /usr/src/app/entrypoint-prod.sh
+
+# run server 
+CMD ["sh","-c","chmod 777 /usr/src/app/entrypoint-prod.sh && /usr/src/app/entrypoint-prod.sh"]
