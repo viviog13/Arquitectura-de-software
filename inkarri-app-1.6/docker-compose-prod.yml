@@ -37,4 +37,3 @@ services:
     build:
       context: ./services/users
       dockerfile: Dockerfile-prod
-
