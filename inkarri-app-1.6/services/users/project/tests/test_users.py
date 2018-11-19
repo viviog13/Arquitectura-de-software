@@ -41,7 +41,7 @@ class TestUserService(BaseTestCase):
             )
             data = json.loads(response.data.decode())
             self.assertEqual(response.status_code, 201)
-            self.assertIn('abelhuanca@upeu.edu.pe se agrego!', data['mensaje'])
+            self.assertIn('abel.huanca@upeu.edu.pe se agrego!', data['mensaje'])
             self.assertIn('satisfactorio', data['estado'])
 
     def test_add_user_invalid_json(self):
